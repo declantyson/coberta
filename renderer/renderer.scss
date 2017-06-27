@@ -1,0 +1,88 @@
+/* 
+*
+*	Renderer
+*	v0.0.1
+*	04/11/2016
+*
+*/
+
+/* Mixins */
+
+@mixin bold() {
+	font-family: 'HelveticaNeue-Bold', sans-serif;
+	font-weight: bold;
+}
+
+@mixin transform($val) {
+	-webkit-transform: $val;
+	transform: $val;
+}
+
+@mixin borderRadius($val) {
+	-webkit-border-radius: $val;
+	border-radius: $val;
+}
+
+@mixin transition($val) {
+	-webkit-transition: $val;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	transition: $val;
+}
+
+@mixin boxShadow($val) {
+	-webkit-box-shadow: $val;
+	box-shadow: $val;
+}
+
+/* Colours */
+
+
+
+/* Defaults */
+
+html, body {
+	margin: 0;
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	&.fullscreencomponents {
+		overflow: hidden;
+	}
+}
+
+body {
+	@include transition(opacity 0.45s ease-out);
+	opacity: 0;
+	&.ready {
+		opacity: 1;
+	}
+}
+
+.clear, .clearfix {
+	clear: both;
+	&.padout {
+		padding: 20px 0;
+	}
+}
+
+.col {
+	float: left;
+	margin-right: 1%;
+	width: 99%;
+	&.col-66 {
+		width: 65%;
+	}
+	&.col-50 {
+		width: 49%;
+	}
+	&.col-33 {
+		width: 32%;
+	}
+}
+
+/* Imports */
+
+#content {
+	position: relative;
+	top: 0px;
+	@include transition(transform 0.4s ease-out);
+}

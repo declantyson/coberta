@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	<title>View test</title>
+	<link rel="stylesheet" type="text/css" href="views/compiled/styles.css">
+</head>
+<body>
+	<div id="content">
+		
+	</div>
+	<script type="text/javascript" src="libs/fetch.min.js"></script>
+	<script type="text/javascript" src="libs/react.min.js"></script>
+	<script type="text/javascript" src="libs/react-dom.min.js"></script>
+	<script type="text/javascript" src="libs/browser.min.js"></script>
+
+	<script type="text/javascript" src="renderer/renderer.js"></script>
+	<script type="text/javascript" src="views/compiled/test-view.js"></script>
+
+	<script type="text/javascript">
+        var views = <%- data %>;
+
+		renderViews(views);
+	</script>
+</body>
+</html>
