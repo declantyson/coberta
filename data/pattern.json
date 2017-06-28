@@ -1,0 +1,19 @@
+[{
+  "type"  : "StaticHTML",
+  "api"   : "",
+  "data"  : {
+    "html"  : "<h1>Pattern Library</h1>"
+  }
+},{
+  "type"  : "StaticHTML",
+  "api"   : "",
+  "data"  : {
+    "html"  : "<h2>Cards</h2><p>Cards are the backbone of Coberta. Cards are a fixed width but have variable height. However, they do have a minimum height of 200px.</p>"
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"  : "Standard card"
+  }
+}]

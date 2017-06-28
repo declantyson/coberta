@@ -36,7 +36,8 @@
 
 /* Colours */
 
-
+$gray: #cfcfcf;
+$darkgray: #333333;
 
 /* Defaults */
 
@@ -48,17 +49,17 @@ html, body {
 	}
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin-top: 0;
-	font-family: 'Spectral', serif;
-}
-
 body {
 	@include transition(opacity 0.45s ease-out);
 	opacity: 0;
 	&.ready {
 		opacity: 1;
 	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;
+	font-family: 'Spectral', serif;
 }
 
 .clear, .clearfix {
@@ -93,3 +94,6 @@ body {
 	padding: 20px;
 	@include transition(transform 0.4s ease-out);
 }
+
+@import "../views/src/card/card";
+@import "../views/src/static-html/static-html";

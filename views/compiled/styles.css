@@ -15,10 +15,6 @@ html, body {
   html.fullscreencomponents, body.fullscreencomponents {
     overflow: hidden; }
 
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  font-family: 'Spectral', serif; }
-
 body {
   -webkit-transition: opacity 0.45s ease-out;
   -webkit-transform: translateZ(0);
@@ -27,6 +23,10 @@ body {
   opacity: 0; }
   body.ready {
     opacity: 1; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: 'Spectral', serif; }
 
 .clear, .clearfix {
   clear: both; }
@@ -53,5 +53,33 @@ body {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   transition: transform 0.4s ease-out; }
+
+/*
+ *
+ *	Card View
+ *	v0.1.0
+ *	28/06/2017
+ *
+ */
+.component.card {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px #cfcfcf;
+  box-shadow: 2px 2px 5px #cfcfcf;
+  padding: 20px;
+  border: solid 1px #cfcfcf;
+  width: 220px;
+  min-height: 200px; }
+  .component.card h2 {
+    color: #333333;
+    border-bottom: solid 1px #cfcfcf; }
+
+/*
+ *
+ *	Static HTML View
+ *	v0.1.0
+ *	28/06/2017
+ *
+ */
 
 /*# sourceMappingURL=styles.css.map */

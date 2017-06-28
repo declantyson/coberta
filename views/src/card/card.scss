@@ -1,0 +1,20 @@
+/*
+ *
+ *	Card View
+ *	v0.1.0
+ *	28/06/2017
+ *
+ */
+
+.component.card {
+ 	@include borderRadius(5px);
+    @include boxShadow(2px 2px 5px $gray);
+    padding: 20px;
+    border: solid 1px $gray;
+    width: 220px;
+	min-height: 200px;
+	h2 {
+		color: $darkgray;
+		border-bottom: solid 1px $gray;
+	}
+}
