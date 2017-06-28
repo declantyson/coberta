@@ -1,5 +1,5 @@
 {
-  "name": "decboard",
+  "name": "coberta",
   "version": "0.0.1",
   "description": "",
   "main": "Gruntfile.js",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "body-parser": "^1.17.2",
     "chai": "^4.0.2",
+    "chance": "^1.0.10",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "fs": "0.0.1-security",

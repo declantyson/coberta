@@ -1,5 +1,5 @@
 /*
- *  React Schnell / Local Server
+ *  Coberta / Local Server
  *  Declan Tyson
  *  v0.2.1
  *  22/06/2017
