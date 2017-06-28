@@ -1,12 +1,12 @@
 /*
  *
- *	Test View
+ *	Static HTML View
  *	v0.1.0
- *	22/06/2016
+ *	28/06/2016
  *  
  */
 
-window.TestView = React.createClass({
+window.StaticHTML = React.createClass({
     getInitialState: function() {
         return { data: [] };
     },
@@ -37,25 +37,8 @@ window.TestView = React.createClass({
             data = this.state.data;
         }
 
-        if(data.length === 0) return false;
-        var testItems = data.testItems.map(function (i) {
-            return (
-                <TestItem text={i.text} />
-            );
-        });
         return ( 
-            <div>
-                <h2 className="testView">Test items</h2>
-                {testItems}
-            </div>
+            <div dangerouslySetInnerHTML={{ __html: data.html }}/>
         );
-    }
-});
-
-window.TestItem = React.createClass({
-    render: function() {
-        return (
-            <p>{this.props.text}</p>
-        )
     }
 });

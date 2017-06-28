@@ -1,18 +1,23 @@
 /* 
 *
-*	Renderer
-*	v0.0.1
-*	04/11/2016
+*	Coberta / Renderer
+*	v0.1.0
+*	28/06/2017
 *
 */
 /* Mixins */
 /* Colours */
 /* Defaults */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Spectral");
 html, body {
   margin: 0;
-  font-family: 'HelveticaNeue-Light', sans-serif; }
+  font-family: 'Open Sans', sans-serif; }
   html.fullscreencomponents, body.fullscreencomponents {
     overflow: hidden; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: 'Spectral', serif; }
 
 body {
   -webkit-transition: opacity 0.45s ease-out;
@@ -43,6 +48,7 @@ body {
 #content {
   position: relative;
   top: 0px;
+  padding: 20px;
   -webkit-transition: transform 0.4s ease-out;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);

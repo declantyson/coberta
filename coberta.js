@@ -64,13 +64,13 @@ function generateId() {
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*
  *
- *	Test View
+ *	Static HTML View
  *	v0.1.0
- *	22/06/2016
+ *	28/06/2016
  *  
  */
 
-window.TestView = React.createClass({displayName: "TestView",
+window.StaticHTML = React.createClass({displayName: "StaticHTML",
     getInitialState: function() {
         return { data: [] };
     },
@@ -101,26 +101,9 @@ window.TestView = React.createClass({displayName: "TestView",
             data = this.state.data;
         }
 
-        if(data.length === 0) return false;
-        var testItems = data.testItems.map(function (i) {
-            return (
-                React.createElement(TestItem, {text: i.text})
-            );
-        });
         return ( 
-            React.createElement("div", null, 
-                React.createElement("h2", {className: "testView"}, "Test items"), 
-                testItems
-            )
+            React.createElement("div", {dangerouslySetInnerHTML: { __html: data.html}})
         );
-    }
-});
-
-window.TestItem = React.createClass({displayName: "TestItem",
-    render: function() {
-        return (
-            React.createElement("p", null, this.props.text)
-        )
     }
 });
 

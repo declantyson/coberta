@@ -1,15 +1,14 @@
 /* 
 *
-*	Renderer
-*	v0.0.1
-*	04/11/2016
+*	Coberta / Renderer
+*	v0.1.0
+*	28/06/2017
 *
 */
 
 /* Mixins */
 
 @mixin bold() {
-	font-family: 'HelveticaNeue-Bold', sans-serif;
 	font-weight: bold;
 }
 
@@ -43,10 +42,15 @@
 
 html, body {
 	margin: 0;
-	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	&.fullscreencomponents {
 		overflow: hidden;
 	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;
+	font-family: 'Spectral', serif;
 }
 
 body {
@@ -81,8 +85,11 @@ body {
 
 /* Imports */
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Spectral');
+
 #content {
 	position: relative;
 	top: 0px;
+	padding: 20px;
 	@include transition(transform 0.4s ease-out);
 }
