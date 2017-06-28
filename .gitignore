@@ -1,5 +1,6 @@
 node_modules/
 .idea/
 .sass-cache/
+data/private/
 .DS_Store
 *.css.map
