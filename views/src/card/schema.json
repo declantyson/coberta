@@ -1,6 +1,12 @@
 {
   "title"    : "Test 123",
-  "children" : [
-      "<StaticHTML data={{ html: '<h1>Test HTML</h1>' }} />"
+  "children" :  [
+    {
+      "type"  : "StaticHTML",
+      "api"  : "",
+      "data"  : {
+        "html"  : "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet orci fringilla, congue dolor ut, consectetur ex. In purus risus, ornare imperdiet scelerisque eu, porta rutrum tortor. Aenean tempor velit nec sem interdum, ut finibus magna suscipit.</p>"
+      }
+    }
   ]
 }

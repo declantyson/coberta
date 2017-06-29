@@ -32,28 +32,4 @@
       }
     ]
   }
-},{
-  "type"  : "Card",
-  "api"   : "",
-  "data"  : {
-    "title"  : "Standard card"
-  }
-},{
-  "type"  : "Card",
-  "api"   : "",
-  "data"  : {
-    "title"  : "Standard card"
-  }
-},{
-  "type"  : "Card",
-  "api"   : "",
-  "data"  : {
-    "title"  : "Standard card"
-  }
-},{
-  "type"  : "Card",
-  "api"   : "",
-  "data"  : {
-    "title"  : "Standard card"
-  }
 }]
