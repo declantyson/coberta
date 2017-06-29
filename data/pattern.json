@@ -8,7 +8,47 @@
   "type"  : "StaticHTML",
   "api"   : "",
   "data"  : {
-    "html"  : "<h2>Cards</h2><p>Cards are the backbone of Coberta. Cards are a fixed width but have variable height. However, they do have a minimum height of 200px.</p>"
+    "html"  : "<h2>Cards</h2><p>Cards are the backbone of Coberta. Cards are a fixed width but have variable height. However, they do have a minimum height of 200px.</p><p> Phasellus ullamcorper orci et ligula varius, vitae egestas leo tincidunt. Ut at elementum mauris. Fusce suscipit orci lacus, a lobortis metus aliquet non. Integer accumsan augue pharetra augue blandit, sit amet dapibus metus venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla tempor vestibulum neque quis ullamcorper. Nunc sit amet faucibus erat.</p>"
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"    : "Standard card",
+    "children" : []
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"    : "Standard card with HTML",
+    "children" : [
+      {
+        "type"  : "StaticHTML",
+        "api"  : "",
+        "data"  : {
+          "html"  : "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet orci fringilla, congue dolor ut, consectetur ex. In purus risus, ornare imperdiet scelerisque eu, porta rutrum tortor. Aenean tempor velit nec sem interdum, ut finibus magna suscipit.</p>"
+        }
+      }
+    ]
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"  : "Standard card"
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"  : "Standard card"
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"  : "Standard card"
   }
 },{
   "type"  : "Card",

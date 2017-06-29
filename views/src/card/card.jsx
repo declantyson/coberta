@@ -1,8 +1,8 @@
 /*
  *
  *	Card View
- *	v0.1.0
- *	28/06/2016
+ *	v0.1.1
+ *	29/06/2016
  *  
  */
 
@@ -32,14 +32,20 @@ window.Card = React.createClass({
         }
     },
     render: function() {
-        var data = this.props.data;
+        let data = this.props.data;
         if(data.length === 0 || this.props.api !== "") {
             data = this.state.data;
+        }
+
+        let children = "";
+        if(typeof data.children !== "undefined" && data.children.length > 0) {
+            children = renderViews(data.children, false);
         }
 
         return (
             <div>
                 <h2>{data.title}</h2>
+                <div className="childcomponents" dangerouslySetInnerHTML={{ __html: children.innerHTML }}/>
             </div>
         );
     }

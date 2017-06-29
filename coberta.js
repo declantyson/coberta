@@ -3,7 +3,7 @@
   *  coberta 
   *  Declan Tyson 
   *  v0.0.1 
-  *  28/06/2017 
+  *  29/06/2017 
   * 
   */
 
@@ -18,9 +18,10 @@ function setAssetFolder(dir) {
     assetFolder = dir;
 }
 
-function renderViews(views) {
+function renderViews(views, append = true) {
 	var content = document.getElementById("content");
-
+	if(!append) content = document.createElement("div");
+	
 	for(var i = 0; i < views.length; i++) {
 		var view = views[i],
 			componentType = view.type,
@@ -43,6 +44,8 @@ function renderViews(views) {
 			components[c].style.height = windowHeight + "px";
 		}
 	}
+
+	return content;
 }
 
 function renderComplete() {
@@ -61,12 +64,13 @@ function generateId() {
 
     return id;
 }
+
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*
  *
  *	Card View
- *	v0.1.0
- *	28/06/2016
+ *	v0.1.1
+ *	29/06/2016
  *  
  */
 
@@ -96,14 +100,20 @@ window.Card = React.createClass({displayName: "Card",
         }
     },
     render: function() {
-        var data = this.props.data;
+        let data = this.props.data;
         if(data.length === 0 || this.props.api !== "") {
             data = this.state.data;
         }
 
+        let children = "";
+        if(typeof data.children !== "undefined" && data.children.length > 0) {
+            children = renderViews(data.children, false);
+        }
+
         return (
             React.createElement("div", null, 
-                React.createElement("h2", null, data.title)
+                React.createElement("h2", null, data.title), 
+                React.createElement("div", {className: "childcomponents", dangerouslySetInnerHTML: { __html: children.innerHTML}})
             )
         );
     }

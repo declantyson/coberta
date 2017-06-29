@@ -1,8 +1,8 @@
 /*
  *
  *	Renderer
- *	v0.1.0
- *	22/06/2016
+ *	v0.1.1
+ *	29/06/2016
  *  
  */ 
 
@@ -17,9 +17,10 @@ function setAssetFolder(dir) {
     assetFolder = dir;
 }
 
-function renderViews(views) {
+function renderViews(views, append = true) {
 	var content = document.getElementById("content");
-
+	if(!append) content = document.createElement("div");
+	
 	for(var i = 0; i < views.length; i++) {
 		var view = views[i],
 			componentType = view.type,
@@ -42,6 +43,8 @@ function renderViews(views) {
 			components[c].style.height = windowHeight + "px";
 		}
 	}
+
+	return content;
 }
 
 function renderComplete() {
