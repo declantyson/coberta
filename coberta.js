@@ -21,7 +21,7 @@ function setAssetFolder(dir) {
 function renderViews(views, append = true) {
 	var content = document.getElementById("content");
 	if(!append) content = document.createElement("div");
-	
+
 	for(var i = 0; i < views.length; i++) {
 		var view = views[i],
 			componentType = view.type,
@@ -46,6 +46,30 @@ function renderViews(views, append = true) {
 	}
 
 	return content;
+}
+
+function renderPreparation(views) {
+	var preppedViews = [];
+
+    for(var i = 0; i < views.length; i++) {
+        var view = views[i],
+            componentType = view.type,
+            api = view.api,
+            data = view.data,
+            pollInterval = view.pollInterval || defaultPollInterval,
+            el = React.createElement(window[componentType], { data: data, pollInterval: pollInterval, api: api }),
+            wrapper = document.createElement('div');
+
+        wrapper.id = generateId();
+        wrapper.className = "component " + componentType.toLowerCase();
+
+        preppedViews.push({
+			el 		: el,
+			wrapper : wrapper
+		})
+    }
+
+    return preppedViews;
 }
 
 function renderComplete() {
@@ -94,6 +118,7 @@ window.Card = React.createClass({displayName: "Card",
             this.getDataFromEndpoint();
             setInterval(this.getDataFromEndpoint, this.props.pollInterval);
         }
+
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
@@ -105,15 +130,24 @@ window.Card = React.createClass({displayName: "Card",
             data = this.state.data;
         }
 
-        let children = "";
+        let children = [];
         if(typeof data.children !== "undefined" && data.children.length > 0) {
-            children = renderViews(data.children, false);
+            children = renderPreparation(data.children);
         }
+        children = children.map(function (child) {
+            return (
+                React.createElement("div", {id: child.wrapper.id, className: child.wrapper.className}, 
+                    child.el
+                )
+            );
+        });
 
         return (
             React.createElement("div", null, 
                 React.createElement("h2", null, data.title), 
-                React.createElement("div", {className: "childcomponents", dangerouslySetInnerHTML: { __html: children.innerHTML}})
+                React.createElement("div", {className: "childcomponents"}, 
+                    children
+                )
             )
         );
     }
@@ -132,7 +166,10 @@ window.Card = React.createClass({displayName: "Card",
 
 window.MFPChart = React.createClass({displayName: "MFPChart",
     getInitialState: function() {
-        return { data: [] };
+        return {
+            data: [],
+            macros: []
+        }
     },
     getDataFromEndpoint: function() {
         var self = this;
@@ -150,21 +187,40 @@ window.MFPChart = React.createClass({displayName: "MFPChart",
             this.getDataFromEndpoint();
             setInterval(this.getDataFromEndpoint, this.props.pollInterval);
         }
+
+        this.getMfpMacroLimits();
+
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
         }
     },
+    getMfpMacroLimits: function() {
+        var self = this;
+
+        fetch("/data/private/mfp.json").then(function(response) {
+            return response.json().then(function(data) {
+                self.setState({ macros: data.macros });
+            });
+        }).catch(function (err) {
+            console.error(self.api, err.toString());
+        });
+    },
     render: function() {
-        let data = this.props.data;
-        if(data.length === 0 || this.props.api !== "") {
-            data = this.state.data;
-        }
+        let self = this,
+            data = self.props.data,
+            macros = self.state.macros;
+
+        if(macros.length === 0) return ( React.createElement("div", null, "Loading...") );
 
         return (
-            React.createElement("div", null
+            React.createElement("div", null, 
+                React.createElement("label", null, "Protein ", macros.protein, "g"), 
+                React.createElement("label", null, "Carbs ", macros.protein, "g"), 
+                React.createElement("label", null, "Fat ", macros.fat, "g")
             )
         );
+
     }
 });
 

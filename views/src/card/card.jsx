@@ -26,6 +26,7 @@ window.Card = React.createClass({
             this.getDataFromEndpoint();
             setInterval(this.getDataFromEndpoint, this.props.pollInterval);
         }
+
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
@@ -37,15 +38,24 @@ window.Card = React.createClass({
             data = this.state.data;
         }
 
-        let children = "";
+        let children = [];
         if(typeof data.children !== "undefined" && data.children.length > 0) {
-            children = renderViews(data.children, false);
+            children = renderPreparation(data.children);
         }
+        children = children.map(function (child) {
+            return (
+                <div id={child.wrapper.id} className={child.wrapper.className}>
+                    {child.el}
+                </div>
+            );
+        });
 
         return (
             <div>
                 <h2>{data.title}</h2>
-                <div className="childcomponents" dangerouslySetInnerHTML={{ __html: children.innerHTML }}/>
+                <div className="childcomponents">
+                    {children}
+                </div>
             </div>
         );
     }

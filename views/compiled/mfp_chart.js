@@ -9,7 +9,10 @@
 
 window.MFPChart = React.createClass({displayName: "MFPChart",
     getInitialState: function() {
-        return { data: [] };
+        return {
+            data: [],
+            macros: []
+        }
     },
     getDataFromEndpoint: function() {
         var self = this;
@@ -27,21 +30,40 @@ window.MFPChart = React.createClass({displayName: "MFPChart",
             this.getDataFromEndpoint();
             setInterval(this.getDataFromEndpoint, this.props.pollInterval);
         }
+
+        this.getMfpMacroLimits();
+
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
         }
     },
+    getMfpMacroLimits: function() {
+        var self = this;
+
+        fetch("/data/private/mfp.json").then(function(response) {
+            return response.json().then(function(data) {
+                self.setState({ macros: data.macros });
+            });
+        }).catch(function (err) {
+            console.error(self.api, err.toString());
+        });
+    },
     render: function() {
-        let data = this.props.data;
-        if(data.length === 0 || this.props.api !== "") {
-            data = this.state.data;
-        }
+        let self = this,
+            data = self.props.data,
+            macros = self.state.macros;
+
+        if(macros.length === 0) return ( React.createElement("div", null, "Loading...") );
 
         return (
-            React.createElement("div", null
+            React.createElement("div", null, 
+                React.createElement("label", null, "Protein ", macros.protein, "g"), 
+                React.createElement("label", null, "Carbs ", macros.protein, "g"), 
+                React.createElement("label", null, "Fat ", macros.fat, "g")
             )
         );
+
     }
 });
 

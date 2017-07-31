@@ -20,7 +20,7 @@ function setAssetFolder(dir) {
 function renderViews(views, append = true) {
 	var content = document.getElementById("content");
 	if(!append) content = document.createElement("div");
-	
+
 	for(var i = 0; i < views.length; i++) {
 		var view = views[i],
 			componentType = view.type,
@@ -45,6 +45,30 @@ function renderViews(views, append = true) {
 	}
 
 	return content;
+}
+
+function renderPreparation(views) {
+	var preppedViews = [];
+
+    for(var i = 0; i < views.length; i++) {
+        var view = views[i],
+            componentType = view.type,
+            api = view.api,
+            data = view.data,
+            pollInterval = view.pollInterval || defaultPollInterval,
+            el = React.createElement(window[componentType], { data: data, pollInterval: pollInterval, api: api }),
+            wrapper = document.createElement('div');
+
+        wrapper.id = generateId();
+        wrapper.className = "component " + componentType.toLowerCase();
+
+        preppedViews.push({
+			el 		: el,
+			wrapper : wrapper
+		})
+    }
+
+    return preppedViews;
 }
 
 function renderComplete() {

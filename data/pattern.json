@@ -48,9 +48,9 @@
         "type"  : "MFPChart",
         "api"  : "",
         "data"  : {
-          "protein" : "24",
-          "carb"    : "44",
-          "fat"     : "19"
+          "protein" : 24,
+          "carb"    : 44,
+          "fat"     : 19
         }
       }
     ]
