@@ -8,7 +8,7 @@
   "type"  : "StaticHTML",
   "api"   : "",
   "data"  : {
-    "html"  : "<h2>Cards</h2><p>Cards are the backbone of Coberta. Cards are a fixed width but have variable height. However, they do have a minimum height of 200px.</p><p> Phasellus ullamcorper orci et ligula varius, vitae egestas leo tincidunt. Ut at elementum mauris. Fusce suscipit orci lacus, a lobortis metus aliquet non. Integer accumsan augue pharetra augue blandit, sit amet dapibus metus venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla tempor vestibulum neque quis ullamcorper. Nunc sit amet faucibus erat.</p>"
+    "html"  : "<h2>Cards</h2><p>Cards are the backbone of Coberta. Cards are a fixed width but have variable height. However, they do have a minimum height of 200px.</p>"
   }
 },{
   "type"  : "Card",
@@ -32,4 +32,27 @@
       }
     ]
   }
-}]
+},{
+  "type"  : "StaticHTML",
+  "api"   : "",
+  "data"  : {
+    "html"  : "<h2>Fitness</h2><p>Using MyFitnessPal you can see an overview of your macro intake for the day. To keep it nice and simple we're sticking with RGB colours; <code>#00FF00</code> for protein, <code>#0000FF</code> for carb, and <code>#FF0000</code> for fat.</p>"
+  }
+},{
+  "type"  : "Card",
+  "api"   : "",
+  "data"  : {
+    "title"    : "Nutrition",
+    "children" : [
+      {
+        "type"  : "MFPChart",
+        "api"  : "",
+        "data"  : {
+          "protein" : "24",
+          "carb"    : "44",
+          "fat"     : "19"
+        }
+      }
+    ]
+  }
+},]

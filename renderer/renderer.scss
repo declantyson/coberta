@@ -1,8 +1,8 @@
 /* 
 *
 *	Coberta / Renderer
-*	v0.1.2
-*	29/06/2017
+*	v0.1.3
+*	31/07/2017
 *
 */
 
@@ -37,13 +37,17 @@
 /* Colours */
 
 $gray: #cfcfcf;
-$darkgray: #333333;
+$lightgray: #efefef;
+$lightergray: #fafafa;
+$darkgray: #666666;
+$darkergray: #333333;
 
 /* Defaults */
 
 html, body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
+	background-color: $lightgray;
 	&.fullscreencomponents {
 		overflow: hidden;
 	}
@@ -66,7 +70,14 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
 	margin: 0 0 1.5rem 0;
-	line-height: 1.4rem;
+	line-height: 1.6rem;
+}
+
+code {
+	background: $lightergray;
+	padding: 5px;
+	border: solid 1px $gray;
+	@include borderRadius(5px);
 }
 
 .clear, .clearfix {

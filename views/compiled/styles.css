@@ -1,8 +1,8 @@
 /* 
 *
 *	Coberta / Renderer
-*	v0.1.2
-*	29/06/2017
+*	v0.1.3
+*	31/07/2017
 *
 */
 /* Mixins */
@@ -11,7 +11,8 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Spectral");
 html, body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  background-color: #efefef; }
   html.fullscreencomponents, body.fullscreencomponents {
     overflow: hidden; }
 
@@ -32,7 +33,14 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin: 0 0 1.5rem 0;
-  line-height: 1.4rem; }
+  line-height: 1.6rem; }
+
+code {
+  background: #fafafa;
+  padding: 5px;
+  border: solid 1px #cfcfcf;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
 
 .clear, .clearfix {
   clear: both; }
@@ -69,8 +77,8 @@ p {
 /*
  *
  *	Card View
- *	v0.1.2
- *	29/06/2017
+ *	v0.1.3
+ *	31/07/2017
  *
  */
 .component.card {
@@ -80,6 +88,7 @@ p {
   box-shadow: 2px 2px 5px #cfcfcf;
   padding: 20px;
   border: solid 1px #cfcfcf;
+  background: white;
   width: 220px;
   min-height: 200px;
   margin: 0 20px 20px 0; }

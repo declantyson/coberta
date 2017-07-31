@@ -1,8 +1,8 @@
 /*
  *
  *	Card View
- *	v0.1.2
- *	29/06/2017
+ *	v0.1.3
+ *	31/07/2017
  *
  */
 
@@ -11,11 +11,12 @@
     @include boxShadow(2px 2px 5px $gray);
     padding: 20px;
     border: solid 1px $gray;
+	background: white;
     width: 220px;
 	min-height: 200px;
 	margin: 0 20px 20px 0;
 	h2 {
-		color: $darkgray;
+		color: $darkergray;
 		border-bottom: solid 1px $gray;
 	}
 }
