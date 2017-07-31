@@ -98,6 +98,49 @@ code {
 
 /*
  *
+ *	MFP Chart
+ *	v0.0.2
+ *	31/07/2017
+ *
+ */
+.component.mfpchart {
+  position: relative;
+  overflow: hidden; }
+  .component.mfpchart label {
+    clear: both;
+    display: block;
+    padding: 10px 0; }
+    .component.mfpchart label p {
+      display: inline-block;
+      float: right;
+      margin: 0;
+      line-height: normal; }
+      .component.mfpchart label p span {
+        font-size: 11px; }
+  .component.mfpchart .progress {
+    -webkit-transition: width 0.25s ease-out;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    transition: width 0.25s ease-out;
+    height: 4px; }
+    .component.mfpchart .progress:after {
+      content: ' ';
+      width: 100vw;
+      height: 4px;
+      position: absolute;
+      background: #efefef;
+      opacity: 0.5; }
+    .component.mfpchart .progress.protein-progress {
+      background: #00FF00; }
+    .component.mfpchart .progress.carb-progress {
+      background: #0000FF; }
+    .component.mfpchart .progress.fat-progress {
+      background: #00FFFF; }
+    .component.mfpchart .progress.overflow-progress {
+      background: #FF0000; }
+
+/*
+ *
  *	Static HTML View
  *	v0.1.2
  *	29/06/2017

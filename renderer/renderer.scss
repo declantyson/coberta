@@ -42,6 +42,8 @@ $lightergray: #fafafa;
 $darkgray: #666666;
 $darkergray: #333333;
 
+$danger: #FF0000;
+
 /* Defaults */
 
 html, body {
@@ -120,4 +122,5 @@ code {
 }
 
 @import "../views/src/card/card";
+@import "../views/src/mfp_chart/mfp_chart";
 @import "../views/src/static-html/static-html";

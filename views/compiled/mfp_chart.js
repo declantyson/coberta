@@ -2,7 +2,7 @@
 /*
  *
  *	MFP Chart
- *	v0.0.1
+ *	v0.0.2
  *	31/07/2016
  *  
  */
@@ -50,17 +50,34 @@ window.MFPChart = React.createClass({displayName: "MFPChart",
         });
     },
     render: function() {
-        let self = this,
-            data = self.props.data,
-            macros = self.state.macros;
+        let data = this.props.data;
+        if(data.length === 0 || this.props.api !== "") {
+            data = this.state.data;
+        }
+
+        let macros = this.state.macros;
 
         if(macros.length === 0) return ( React.createElement("div", null, "Loading...") );
 
+        let progress = {
+                protein : (data.protein / macros.protein) * 100,
+                carb    : (data.carb / macros.carb) * 100,
+                fat     : (data.fat / macros.fat) * 100,
+            },
+            proteinClass = progress.protein > 100 ? "progress protein-progress overflow-progress" : "progress protein-progress",
+            carbClass = progress.carb > 100 ? "progress carb-progress overflow-progress" : "progress carb-progress",
+            fatClass = progress.fat > 100 ? "progress fat-progress overflow-progress" : "progress fat-progress";
+
         return (
             React.createElement("div", null, 
-                React.createElement("label", null, "Protein ", macros.protein, "g"), 
-                React.createElement("label", null, "Carbs ", macros.protein, "g"), 
-                React.createElement("label", null, "Fat ", macros.fat, "g")
+                React.createElement("label", null, "Protein ", React.createElement("p", null, data.protein, "/", React.createElement("span", null, macros.protein, "g"))), 
+                React.createElement("div", {className: proteinClass, style: { width: progress.protein + "%"}}), 
+
+                React.createElement("label", null, "Carb ", React.createElement("p", null, data.carb, "/", React.createElement("span", null, macros.carb, "g"))), 
+                React.createElement("div", {className: carbClass, style: { width: progress.carb + "%"}}), 
+
+                React.createElement("label", null, "Fat ", React.createElement("p", null, data.fat, "/", React.createElement("span", null, macros.fat, "g"))), 
+                React.createElement("div", {className: fatClass, style: { width: progress.fat + "%"}})
             )
         );
 

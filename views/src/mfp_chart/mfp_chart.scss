@@ -1,11 +1,50 @@
 /*
  *
  *	MFP Chart
- *	v0.0.1
+ *	v0.0.2
  *	31/07/2017
  *
  */
 
-.component.mfpchart {
+$protein: #00FF00;
+$carb: #0000FF;
+$fat: #00FFFF;
 
+.component.mfpchart {
+	position: relative;
+	overflow: hidden;
+
+	label {
+		clear: both;
+		display: block;
+		padding: 10px 0;
+		p {
+			display: inline-block;
+			float: right;
+			margin: 0;
+			line-height: normal;
+			span {
+				font-size: 11px;
+			}
+		}
+	}
+
+	.progress {
+		@include transition(width 0.25s ease-out);
+		height: 4px;
+
+		&:after {
+			content: ' ';
+			width: 100vw;
+			height: 4px;
+			position: absolute;
+			background: $lightgray;
+			opacity: 0.5;
+		}
+		&.protein-progress { background: $protein; }
+		&.carb-progress { background: $carb; }
+		&.fat-progress { background: $fat; }
+
+		&.overflow-progress { background: $danger; }
+	}
 }
