@@ -1,8 +1,8 @@
 /*
  *  Coberta / Tests / Static HTML
  *  Declan Tyson
- *  v0.1.1
- *  29/06/2017
+ *  v0.1.2
+ *  31/07/2017
  */
 
 var cardSchema = [{
@@ -30,23 +30,22 @@ var cardSchema = [{
 }];
 
 describe('Card', function() {
-
-    renderViews(cardSchema);
+    let content = renderViews(cardSchema, false);
 
     it('should output a card', function () {
-        var cards  = document.querySelectorAll('.component.card');
+        var cards  = content.querySelectorAll('.component.card');
 
-        assert(cards.length === 2, `expected to find 2 cards, instead ${cards.length}`);
+        assert(cards.length >= 2, `expected to find at least 2 cards, instead ${cards.length}`);
     });
 
     it('should contain a title', function () {
-        var cardHeader  = document.querySelector('.component.card').querySelector('h2');
+        var cardHeader  = content.querySelector('.component.card').querySelector('h2');
 
         assert(cardHeader.innerText === "Test card", `expected card header, instead ${cardHeader.innerText}`);
     });
 
     it('should contain HTML when given StaticHTML children', function() {
-        var paragraph = document.querySelectorAll('.component.card .component.statichtml p');
+        var paragraph = content.querySelectorAll('.component.card .component.statichtml p');
 
         assert(paragraph.length === 1, `expected to find 1 paragraph, instead ${paragraph.length}`);
     });

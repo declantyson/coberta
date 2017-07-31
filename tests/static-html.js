@@ -1,8 +1,8 @@
 /*
  *  Coberta / Tests / Static HTML
  *  Declan Tyson
- *  v0.1.0
- *  28/06/2017
+ *  v0.1.1
+ *  31/07/2017
  */
 
 var staticHTMLSchema = [{
@@ -15,9 +15,10 @@ var staticHTMLSchema = [{
 
 describe('Static HTML', function() {
 
+    let content = renderViews(staticHTMLSchema, false);
+
     it('should output the HTML passed in', function () {
-        renderViews(staticHTMLSchema);
-        var staticHTML  = document.querySelectorAll('.component.statichtml h1');
+        var staticHTML  = content.querySelectorAll('.component.statichtml h1');
 
         assert(staticHTML.length === 1, `expected to find 1 h1 tag, instead ${staticHTML.length}`);
         assert(staticHTML[0].innerText === "Test HTML", `expected to read 'Test HTML', instead ${staticHTML[0].innerText}`);

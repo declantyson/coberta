@@ -1,7 +1,7 @@
 /*
  *  Coberta / Tests / Application
  *  Declan Tyson
- *  v0.1.1
+ *  v0.1.2
  *  31/07/2017
  */
 
@@ -39,20 +39,28 @@ describe('Coberta', function() {
                     "type": "MFPChart",
                     "api": "",
                     "data": {
-                        "protein": "24",
-                        "carb": "44",
-                        "fat": "19"
+                        "calories" : 4444,
+                        "protein": 24,
+                        "carb": 44,
+                        "fat": 19
                     }
                 }]
             }
         }];
 
-        renderViews(mfpTestData);
+        let content        = renderViews(mfpTestData, false),
+            mfpHeader      = content.querySelector('.component.card h2'),
+            mfpProgressBars = content.querySelectorAll('.progress');
 
-        let mfpHeader  = document.querySelector('.component.card').querySelector('h2');
+        console.log(content);
 
         it('should have a card with the title "Nutrition"', function(){
-            assert(cardHeader.innerText === "Nutrition", `expected card title "Nutrition", instead ${cardHeader.innerText}`);
+            assert(mfpHeader.innerText === "Nutrition", `expected card title "Nutrition", instead ${mfpHeader.innerText}`);
+        });
+
+        it('should have 4 progress bars', function(){
+            this.timeout(5000);
+            assert(mfpProgressBars.length === 4, `expected 4 progress bars, instead ${mfpProgressBars.length}`);
         });
 
     });
