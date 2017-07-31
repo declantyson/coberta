@@ -19,7 +19,7 @@ app.use("/data", express.static('data'));
 app.use("/libs", express.static('libs'));
 app.use("/node_modules", express.static('node_modules'));
 app.use("/fonts", express.static('fonts'));
-app.use("/img", express.static('media'));
+app.use("/img", express.static('renderer/img'));
 app.use("/media", express.static('media'));
 app.use("/tests", express.static('tests'));
 

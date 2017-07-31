@@ -1,8 +1,8 @@
 /*
  *  Coberta / Tests / Application
  *  Declan Tyson
- *  v0.1.0
- *  28/06/2017
+ *  v0.1.1
+ *  31/07/2017
  */
 
 const notYetImplemented = false;
@@ -11,6 +11,10 @@ describe('Coberta', function() {
 
     it('should probably have a fancy clock, because all dashboards have a fancy clock', function(){
         assert(notYetImplemented, 'fancy clock not found');
+    });
+
+    it('should show different items based on the time of day', function(){
+        assert(notYetImplemented, 'thingy still todo');
     });
 
     it('should pull open issues assigned to me from my HWC tracker for a list of specified projects', function(){
@@ -25,8 +29,32 @@ describe('Coberta', function() {
         assert(notYetImplemented, 'fitbit data not found');
     });
 
-    it('should pull my nutritional statistics for the day from myfitnesspal and display them as a chart', function(){
-        assert(notYetImplemented, 'myfitnesspal data not found');
+    describe('MyFitnessPal integration', function () {
+        let mfpTestData = [{
+            "type" : "Card",
+            "api"  : "",
+            "data" : {
+                "title" : "Nutrition",
+                "children": [{
+                    "type": "MFPChart",
+                    "api": "",
+                    "data": {
+                        "protein": "24",
+                        "carb": "44",
+                        "fat": "19"
+                    }
+                }]
+            }
+        }];
+
+        renderViews(mfpTestData);
+
+        let mfpHeader  = document.querySelector('.component.card').querySelector('h2');
+
+        it('should have a card with the title "Nutrition"', function(){
+            assert(cardHeader.innerText === "Nutrition", `expected card title "Nutrition", instead ${cardHeader.innerText}`);
+        });
+
     });
 
     it('should pull the last paragraph from the latest modified blog from the 2017.declantyson repository and provide me with an option to extend it', function(){

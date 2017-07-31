@@ -1,0 +1,9 @@
+{
+  "username"  : "your_username_here",
+  "macros"    : {
+    "calories" : 2500,
+    "carbs"    : 200,
+    "protein"  : 200,
+    "fat"      : 80
+  }
+}
