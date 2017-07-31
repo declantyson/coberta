@@ -9,6 +9,7 @@ const http = require('http'),
     ejs = require('ejs'),
     fs = require('fs'),
     express = require('express'),
+    mfp = require('mfp'),
     app = express(),
     port = 1234;
 
@@ -57,6 +58,23 @@ app.get('/tests', (req,res) => {
     });
 });
 
+app.get('/mfp', (req, res) => {
+    let today = new Date();
+    fs.readFile('data/private/mfp.json', 'utf8', (err, content) => {
+        if (err) {
+            res.statusCode = 500;
+            res.end(err);
+            return;
+        }
+
+        let username = JSON.parse(content).username;
+
+        mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', function (data) {
+            res.json(data);
+        });
+    });
+});
+
 app.get('/:file', (req,res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
     fs.readFile('index.ejs', 'utf8', (err, wrapperContent) => {
@@ -83,6 +101,7 @@ app.get('/:file', (req,res) => {
         });
     });
 });
+
 
 http.createServer(app).listen(port);
 

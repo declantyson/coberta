@@ -1,7 +1,7 @@
 /*
  *
  *	MFP Chart
- *	v0.0.2
+ *	v0.1.0
  *	31/07/2016
  *  
  */
@@ -54,26 +54,37 @@ window.MFPChart = React.createClass({
             data = this.state.data;
         }
 
-        let macros = this.state.macros;
+        if(!data.calories) data.calories = 0;
+        if(!data.protein) data.protein = 0;
+        if(!data.carbs) data.carbs = 0;
+        if(!data.fat) data.fat = 0;
 
+        data.calories = (data.calories / 10);
+
+        let macros = this.state.macros;
         if(macros.length === 0) return ( <div>Loading...</div> );
 
         let progress = {
-                protein : (data.protein / macros.protein) * 100,
-                carb    : (data.carb / macros.carb) * 100,
-                fat     : (data.fat / macros.fat) * 100,
+                calories : (data.calories / macros.calories) * 100,
+                protein  : (data.protein / macros.protein) * 100,
+                carbs    : (data.carbs / macros.carbs) * 100,
+                fat      : (data.fat / macros.fat) * 100,
             },
+            caloriesClass = progress.calories > 100 ? "progress calories-progress overflow-progress" : "progress calories-progress",
             proteinClass = progress.protein > 100 ? "progress protein-progress overflow-progress" : "progress protein-progress",
-            carbClass = progress.carb > 100 ? "progress carb-progress overflow-progress" : "progress carb-progress",
+            carbClass = progress.carbs > 100 ? "progress carb-progress overflow-progress" : "progress carb-progress",
             fatClass = progress.fat > 100 ? "progress fat-progress overflow-progress" : "progress fat-progress";
 
         return (
             <div>
+                <label>Calories <p>{data.calories}/<span>{macros.calories}</span></p></label>
+                <div className={caloriesClass} style={{ width: progress.calories + "%" }}/>
+
                 <label>Protein <p>{data.protein}/<span>{macros.protein}g</span></p></label>
                 <div className={proteinClass} style={{ width: progress.protein + "%" }}/>
 
-                <label>Carb <p>{data.carb}/<span>{macros.carb}g</span></p></label>
-                <div className={carbClass} style={{ width: progress.carb + "%" }}/>
+                <label>Carb <p>{data.carbs}/<span>{macros.carbs}g</span></p></label>
+                <div className={carbClass} style={{ width: progress.carbs + "%" }}/>
 
                 <label>Fat <p>{data.fat}/<span>{macros.fat}g</span></p></label>
                 <div className={fatClass} style={{ width: progress.fat + "%" }}/>

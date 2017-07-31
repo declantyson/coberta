@@ -1,11 +1,12 @@
 /*
  *
  *	MFP Chart
- *	v0.0.2
+ *	v0.1.0
  *	31/07/2017
  *
  */
 
+$calories: #FF00FF;
 $protein: #00FF00;
 $carb: #0000FF;
 $fat: #00FFFF;
@@ -41,6 +42,7 @@ $fat: #00FFFF;
 			background: $lightgray;
 			opacity: 0.5;
 		}
+		&.calories-progress { background: $calories; }
 		&.protein-progress { background: $protein; }
 		&.carb-progress { background: $carb; }
 		&.fat-progress { background: $fat; }

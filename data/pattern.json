@@ -38,19 +38,20 @@
   "data"  : {
     "html"  : "<h2>Fitness</h2><p>Using MyFitnessPal you can see an overview of your macro intake for the day. Colours are; <code>#00FF00</code> for protein, <code>#0000FF</code> for carb, and <code>#00FFFF</code> for fat. <code>#FF0000</code> is used for bars that have gone over the daily intake limit.</p>"
   }
-},{
-  "type"  : "Card",
-  "api"   : "",
-  "data"  : {
-    "title"    : "Nutrition",
-    "children" : [
-      {
-        "type"  : "MFPChart",
-        "api"  : "/data/mfp_daily_test_data.json",
-        "data"  : {
+},
+  {
+    "type": "Card",
+    "api": "",
+    "data": {
+      "title": "Nutrition",
+      "children": [
+        {
+          "type": "MFPChart",
+          "api": "/mfp",
+          "data": {
 
+          }
         }
-      }
-    ]
-  }
-},]
+      ]
+    }
+  }]

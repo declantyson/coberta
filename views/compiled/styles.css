@@ -99,7 +99,7 @@ code {
 /*
  *
  *	MFP Chart
- *	v0.0.2
+ *	v0.1.0
  *	31/07/2017
  *
  */
@@ -130,6 +130,8 @@ code {
       position: absolute;
       background: #efefef;
       opacity: 0.5; }
+    .component.mfpchart .progress.calories-progress {
+      background: #FF00FF; }
     .component.mfpchart .progress.protein-progress {
       background: #00FF00; }
     .component.mfpchart .progress.carb-progress {
