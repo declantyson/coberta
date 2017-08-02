@@ -1,5 +1,5 @@
 {
-  "date"  : "2017-08-01"
+  "date"  : "2017-08-01",
   "transactions"  :  [
     { "description" :  "Coffee",  "value" : 2.80 },
     { "description" :  "Travel",  "value" : 4.50 },

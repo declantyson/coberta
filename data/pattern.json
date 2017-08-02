@@ -68,7 +68,7 @@
     "children": [
       {
         "type": "Finance",
-        "api": "",
+        "api": "/data/private/finance",
         "data": {
           "day" : "Yesterday"
         }
@@ -83,7 +83,7 @@
     "children": [
       {
         "type": "Finance",
-        "api": "",
+        "api": "/data/private/finance",
         "data": {
           "day" : "Today"
         }
