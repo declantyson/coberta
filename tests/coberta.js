@@ -125,6 +125,10 @@ describe('Coberta', function() {
             assert(notYetImplemented, 'total not automatically updated');
         });
 
+        it('should include a running total of the week up until today', function(){
+            assert(notYetImplemented, 'weekly total not found');
+        });
+
     });
 
 });

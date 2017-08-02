@@ -1,14 +1,16 @@
 /*
  *
  *	Finance
- *	v0.1.0
+ *	v0.1.1
  *	02/08/2016
  *  
  */
 
 window.Finance = React.createClass({
     getInitialState: function() {
-        return { data: {} }
+        return {
+            data: {}
+        }
     },
     setFinanceData: function(day, key) {
         var self = this;
@@ -35,16 +37,30 @@ window.Finance = React.createClass({
         this.setFinanceData(day.toISOString().substring(0, 10), "Yesterday");
     },
     componentDidMount: function() {
-        setInterval(this.getDataFromEndpoint, this.props.pollInterval);
+        this.getDataFromEndpoint();
+        //setInterval(this.getDataFromEndpoint, this.props.pollInterval);
 
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
         }
     },
-    render: function() {
+    updateTransactionList: function(transaction) {
         let data = this.props.data,
             financialData = this.state.data,
+            dayData = financialData[data.day];
+
+        dayData.transactions.push(transaction);
+        financialData[data.day] = dayData;
+
+        this.setState({
+           data : financialData
+        });
+    },
+    render: function() {
+        let self = this,
+            data = self.props.data,
+            financialData = self.state.data,
             total = 0,
             budget = 15, // TODO: make this configurable
             remaining = budget,
@@ -60,7 +76,6 @@ window.Finance = React.createClass({
             if(data.day === "Today") {
                 let spentYesterday = 0;
 
-                console.log(financialData);
                 financialData.Yesterday.transactions.map(function (transaction) {
                     spentYesterday += transaction.value;
                 });
@@ -82,38 +97,61 @@ window.Finance = React.createClass({
                     {sign}&pound;{remaining}
                     <span>&pound;<em className="day-total">{total}</em> spent</span>
                 </h1>
-                <TransactionList transactions={financialData[data.day]} />
+                <TransactionList transactions={financialData[data.day]} updateTransactionList={self.updateTransactionList} />
             </div>
         );
     }
 });
 
 window.TransactionList = React.createClass({
-   render: function () {
-       if(typeof this.props.transactions === "undefined") return ( <div>Loading...</div> );
+    getInitialState: function() {
+        return {
+            transactionDescriptionInputId : generateId(),
+            transactionValueInputId : generateId()
+        }
+    },
+    addToList: function() {
+        let transactionName = document.getElementById(this.state.transactionDescriptionInputId).value,
+            transactionValue = document.getElementById(this.state.transactionValueInputId).value,
+            transaction = {
+                "description" : transactionName,
+                "value"      : parseFloat(transactionValue)
+            };
 
-       let transactionData = this.props.transactions,
-           transactions = transactionData.transactions.map(function (transaction) {
-           return (
-                <Transaction description={transaction.description} value={transaction.value} />
-           );
-       });
+        if(isNaN(parseFloat(transactionValue))) {
+            alert("error"); // todo: nicer
+            return;
+        }
 
-       return (
+        this.props.updateTransactionList(transaction);
+    },
+
+    render: function () {
+        if(typeof this.props.transactions === "undefined") return ( <div>Loading...</div> );
+
+        let self = this,
+            transactionData = self.props.transactions,
+            transactions = transactionData.transactions.map(function (transaction) {
+            return (
+                 <Transaction description={transaction.description} value={transaction.value} />
+            );
+        });
+
+        return (
            <div className="transactions">
                {transactions}
 
-               <div className="transaction add-transaction">
+               <form className="transaction add-transaction" onDoubleClick={self.addToList.bind(self)}>
                    <div className="transaction-description">
-                       <input type="text" name="transaction-description" />
+                       <input type="text" name="transaction-description" id={self.state.transactionDescriptionInputId} />
                    </div>
                    <div className="transaction-value">
-                       <input type="number" name="transaction-value" />
+                       <input type="number" name="transaction-value" id={self.state.transactionValueInputId} />
                    </div>
-               </div>
+               </form>
 
            </div>
-       );
+        );
    }
 });
 

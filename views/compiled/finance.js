@@ -2,14 +2,16 @@
 /*
  *
  *	Finance
- *	v0.1.0
+ *	v0.1.1
  *	02/08/2016
  *  
  */
 
 window.Finance = React.createClass({displayName: "Finance",
     getInitialState: function() {
-        return { data: {} }
+        return {
+            data: {}
+        }
     },
     setFinanceData: function(day, key) {
         var self = this;
@@ -36,16 +38,30 @@ window.Finance = React.createClass({displayName: "Finance",
         this.setFinanceData(day.toISOString().substring(0, 10), "Yesterday");
     },
     componentDidMount: function() {
-        setInterval(this.getDataFromEndpoint, this.props.pollInterval);
+        this.getDataFromEndpoint();
+        //setInterval(this.getDataFromEndpoint, this.props.pollInterval);
 
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
             renderComplete();
         }
     },
-    render: function() {
+    updateTransactionList: function(transaction) {
         let data = this.props.data,
             financialData = this.state.data,
+            dayData = financialData[data.day];
+
+        dayData.transactions.push(transaction);
+        financialData[data.day] = dayData;
+
+        this.setState({
+           data : financialData
+        });
+    },
+    render: function() {
+        let self = this,
+            data = self.props.data,
+            financialData = self.state.data,
             total = 0,
             budget = 15, // TODO: make this configurable
             remaining = budget,
@@ -61,7 +77,6 @@ window.Finance = React.createClass({displayName: "Finance",
             if(data.day === "Today") {
                 let spentYesterday = 0;
 
-                console.log(financialData);
                 financialData.Yesterday.transactions.map(function (transaction) {
                     spentYesterday += transaction.value;
                 });
@@ -83,38 +98,61 @@ window.Finance = React.createClass({displayName: "Finance",
                     sign, "£", remaining, 
                     React.createElement("span", null, "£", React.createElement("em", {className: "day-total"}, total), " spent")
                 ), 
-                React.createElement(TransactionList, {transactions: financialData[data.day]})
+                React.createElement(TransactionList, {transactions: financialData[data.day], updateTransactionList: self.updateTransactionList})
             )
         );
     }
 });
 
 window.TransactionList = React.createClass({displayName: "TransactionList",
-   render: function () {
-       if(typeof this.props.transactions === "undefined") return ( React.createElement("div", null, "Loading...") );
+    getInitialState: function() {
+        return {
+            transactionDescriptionInputId : generateId(),
+            transactionValueInputId : generateId()
+        }
+    },
+    addToList: function() {
+        let transactionName = document.getElementById(this.state.transactionDescriptionInputId).value,
+            transactionValue = document.getElementById(this.state.transactionValueInputId).value,
+            transaction = {
+                "description" : transactionName,
+                "value"      : parseFloat(transactionValue)
+            };
 
-       let transactionData = this.props.transactions,
-           transactions = transactionData.transactions.map(function (transaction) {
-           return (
-                React.createElement(Transaction, {description: transaction.description, value: transaction.value})
-           );
-       });
+        if(isNaN(parseFloat(transactionValue))) {
+            alert("error"); // todo: nice
+            return;
+        }
 
-       return (
+        this.props.updateTransactionList(transaction);
+    },
+
+    render: function () {
+        if(typeof this.props.transactions === "undefined") return ( React.createElement("div", null, "Loading...") );
+
+        let self = this,
+            transactionData = self.props.transactions,
+            transactions = transactionData.transactions.map(function (transaction) {
+            return (
+                 React.createElement(Transaction, {description: transaction.description, value: transaction.value})
+            );
+        });
+
+        return (
            React.createElement("div", {className: "transactions"}, 
                transactions, 
 
-               React.createElement("div", {className: "transaction add-transaction"}, 
+               React.createElement("form", {className: "transaction add-transaction", onDoubleClick: self.addToList.bind(self)}, 
                    React.createElement("div", {className: "transaction-description"}, 
-                       React.createElement("input", {type: "text", name: "transaction-description"})
+                       React.createElement("input", {type: "text", name: "transaction-description", id: self.state.transactionDescriptionInputId})
                    ), 
                    React.createElement("div", {className: "transaction-value"}, 
-                       React.createElement("input", {type: "number", name: "transaction-value"})
+                       React.createElement("input", {type: "number", name: "transaction-value", id: self.state.transactionValueInputId})
                    )
                )
 
            )
-       );
+        );
    }
 });
 
