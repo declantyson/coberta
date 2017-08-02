@@ -1,7 +1,7 @@
 /*
  *  Coberta / Tests / Application
  *  Declan Tyson
- *  v0.1.3
+ *  v0.1.4
  *  02/08/2017
  */
 
@@ -41,7 +41,7 @@ describe('Coberta', function() {
                     "data": {
                         "calories" : 4444,
                         "protein": 24,
-                        "carb": 44,
+                        "carbs": 44,
                         "fat": 19
                     }
                 }]
@@ -64,6 +64,17 @@ describe('Coberta', function() {
             }, 500);
         });
 
+        it('should have progress bars of the correct length', function () {
+            assert(notYetImplemented, 'progress bars length incorrect');
+        });
+
+        it('should display the numeric value of each metric', function () {
+            assert(notYetImplemented, 'numeric values not found');
+        });
+
+        it('should have red progress bars when they are > 100% wide', function () {
+            assert(notYetImplemented, 'overflowing progress bars are not red');
+        });
 
     });
 
