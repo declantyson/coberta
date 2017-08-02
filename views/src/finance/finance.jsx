@@ -38,11 +38,54 @@ window.Finance = React.createClass({
             data = this.state.data;
         }
 
+        let className = "danger";
+
         return (
             <div>
-
+                <h1 className={className}>
+                    &pound;2.21
+                    <span>&pound;12.79 spent</span>
+                </h1>
+                <TransactionList/>
             </div>
         );
-
     }
+});
+
+window.TransactionList = React.createClass({
+   render: function () {
+
+       let transactions = [0,1,2,3,4].map(function (i) {
+           return (
+                <Transaction description="Test transaction" value="2.50"/>
+           );
+       });
+
+       return (
+           <div className="transactions">
+               {transactions}
+
+               <div className="transaction add-transaction">
+                   <div className="transaction-description">
+                       <input type="text" name="transaction-description" />
+                   </div>
+                   <div className="transaction-value">
+                       <input type="number" name="transaction-value" />
+                   </div>
+               </div>
+
+           </div>
+       );
+   }
+});
+
+window.Transaction = React.createClass({
+   render: function () {
+       return (
+           <div className="transaction">
+               <div className="transaction-description">{this.props.description}</div>
+               <div className="transaction-value">{this.props.value}</div>
+           </div>
+       )
+   }
 });

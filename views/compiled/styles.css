@@ -100,6 +100,39 @@ code {
 
 /*
  *
+ *	Finance
+ *	v0.1.0
+ *	02/08/2017
+ *
+ */
+.component.finance h1 {
+  text-align: center; }
+  .component.finance h1.danger {
+    color: #CC5252; }
+  .component.finance h1 span {
+    font-size: 0.5em;
+    line-height: 0.7em;
+    font-weight: lighter;
+    display: block; }
+.component.finance .transactions .transaction {
+  border-bottom: solid 1px #efefef;
+  padding: 5px 0;
+  display: flex; }
+  .component.finance .transactions .transaction div {
+    margin-right: 10px; }
+    .component.finance .transactions .transaction div.transaction-description {
+      flex: 1; }
+    .component.finance .transactions .transaction div.transaction-value {
+      text-align: right;
+      width: 50px; }
+  .component.finance .transactions .transaction input {
+    width: calc(100% - 10px);
+    padding: 5px; }
+  .component.finance .transactions .transaction:last-of-type {
+    border-bottom: none; }
+
+/*
+ *
  *	MFP Chart
  *	v0.1.0
  *	31/07/2017
@@ -141,7 +174,7 @@ code {
     .component.mfpchart .progress.fat-progress {
       background: #00FFFF; }
     .component.mfpchart .progress.overflow-progress {
-      background: #FF0000; }
+      background: #CC5252; }
 
 /*
  *

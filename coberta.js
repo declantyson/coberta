@@ -196,13 +196,56 @@ window.Finance = React.createClass({displayName: "Finance",
             data = this.state.data;
         }
 
-        return (
-            React.createElement("div", null
+        let className = "danger";
 
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", {className: className}, 
+                    "£2.21", 
+                    React.createElement("span", null, "£12.79 spent")
+                ), 
+                React.createElement(TransactionList, null)
             )
         );
-
     }
+});
+
+window.TransactionList = React.createClass({displayName: "TransactionList",
+   render: function () {
+
+       let transactions = [0,1,2,3,4].map(function (i) {
+           return (
+                React.createElement(Transaction, {description: "Test transaction", value: "2.50"})
+           );
+       });
+
+       return (
+           React.createElement("div", {className: "transactions"}, 
+               transactions, 
+
+               React.createElement("div", {className: "transaction add-transaction"}, 
+                   React.createElement("div", {className: "transaction-description"}, 
+                       React.createElement("input", {type: "text", name: "transaction-description"})
+                   ), 
+                   React.createElement("div", {className: "transaction-value"}, 
+                       React.createElement("input", {type: "number", name: "transaction-value"})
+                   )
+               )
+
+           )
+       );
+   }
+});
+
+window.Transaction = React.createClass({displayName: "Transaction",
+   render: function () {
+       return (
+           React.createElement("div", {className: "transaction"}, 
+               React.createElement("div", {className: "transaction-description"}, this.props.description), 
+               React.createElement("div", {className: "transaction-value"}, this.props.value)
+           )
+       )
+   }
 });
 
 },{}]},{},[1]);

@@ -1,11 +1,47 @@
 /*
  *
  *	Finance
- *	v0.0.1
+ *	v0.1.0
  *	02/08/2017
  *
  */
 
 .component.finance {
+	h1 {
+		text-align: center;
+		&.danger {
+			color: $danger;
+		}
+		span {
+			font-size: 0.5em;
+			line-height: 0.7em;
+			font-weight: lighter;
+			display: block;
+		}
+	}
 
+	.transactions {
+		.transaction {
+			border-bottom: solid 1px $lightgray;
+			padding: 5px 0;
+			display: flex;
+			div {
+				margin-right: 10px;
+				&.transaction-description {
+					flex: 1;
+				}
+				&.transaction-value {
+					text-align: right;
+					width: 50px;
+				}
+			}
+			input {
+				width: calc(100% - 10px);
+				padding: 5px;
+			}
+			&:last-of-type {
+				border-bottom: none;
+			}
+		}
+	}
 }
