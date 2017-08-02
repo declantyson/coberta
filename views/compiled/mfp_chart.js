@@ -60,8 +60,6 @@ window.MFPChart = React.createClass({displayName: "MFPChart",
         if(!data.carbs) data.carbs = 0;
         if(!data.fat) data.fat = 0;
 
-        data.calories = (data.calories / 10);
-
         let macros = this.state.macros;
         if(macros.length === 0) return ( React.createElement("div", null, "Loading...") );
 

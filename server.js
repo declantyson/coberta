@@ -1,8 +1,8 @@
 /*
  *  Coberta / Local Server
  *  Declan Tyson
- *  v0.2.1
- *  22/06/2017
+ *  v0.3.0
+ *  02/08/2017
  */
 
 const http = require('http'),
@@ -68,10 +68,13 @@ app.get('/mfp', (req, res) => {
         }
 
         let username = JSON.parse(content).username;
-
-        mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', function (data) {
-            res.json(data);
-        });
+        try {
+            mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', function (data) {
+                res.json(data);
+            });
+        } catch (ex) {
+            console.error(ex);
+        }
     });
 });
 
