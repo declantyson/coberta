@@ -1,8 +1,8 @@
 /*
  *  Coberta / Tests / Application
  *  Declan Tyson
- *  v0.1.2
- *  31/07/2017
+ *  v0.1.3
+ *  02/08/2017
  */
 
 const notYetImplemented = false;
@@ -49,19 +49,21 @@ describe('Coberta', function() {
         }];
 
         let content        = renderViews(mfpTestData, false),
-            mfpHeader      = content.querySelector('.component.card h2'),
-            mfpProgressBars = content.querySelectorAll('.progress');
-
-        console.log(content);
+            mfpHeader      = content.querySelector('.component.card h2');
 
         it('should have a card with the title "Nutrition"', function(){
             assert(mfpHeader.innerText === "Nutrition", `expected card title "Nutrition", instead ${mfpHeader.innerText}`);
         });
 
-        it('should have 4 progress bars', function(){
-            this.timeout(5000);
-            assert(mfpProgressBars.length === 4, `expected 4 progress bars, instead ${mfpProgressBars.length}`);
+        it('should have 4 progress bars', function(done){
+            this.timeout(1500);
+            setTimeout(function () {
+                let mfpProgressBars = content.querySelectorAll('.progress');
+                assert(mfpProgressBars.length === 4, `expected 4 progress bars, instead ${mfpProgressBars.length}`);
+                done();
+            }, 500);
         });
+
 
     });
 
