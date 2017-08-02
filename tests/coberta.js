@@ -1,13 +1,15 @@
 /*
  *  Coberta / Tests / Application
  *  Declan Tyson
- *  v0.1.4
+ *  v0.1.5
  *  02/08/2017
  */
 
 const notYetImplemented = false;
 
 describe('Coberta', function() {
+
+    // Requirements...
 
     it('should probably have a fancy clock, because all dashboards have a fancy clock', function(){
         assert(notYetImplemented, 'fancy clock not found');
@@ -28,6 +30,24 @@ describe('Coberta', function() {
     it('should pull my latest run data from fitbit and when I am next scheduled for exercise', function(){
         assert(notYetImplemented, 'fitbit data not found');
     });
+
+    it('should pull the last paragraph from the latest modified blog from the 2017.declantyson repository and provide me with an option to extend it', function(){
+        assert(notYetImplemented, 'blog data not found');
+    });
+
+    it('should prompt me at a specified time on a specified day to write a paragraph on a specified blog topic and save it to a .md file in the 2017.declantyson repository', function(){
+        assert(notYetImplemented, 'blog prompt not found');
+    });
+
+    it('should pull the last paragraph of the last chapter I worked on in StoryStore and provide me with an option to extend it', function(){
+        assert(notYetImplemented, 'book data not found');
+    });
+
+    it('should prompt me at a specified time on a specified day to write a paragraph on the last chapter I worked on in StoryStore', function(){
+        assert(notYetImplemented, 'book prompt not found');
+    });
+
+    // Actual tests...
 
     describe('MyFitnessPal integration', function () {
         let mfpTestData = [{
@@ -78,20 +98,33 @@ describe('Coberta', function() {
 
     });
 
-    it('should pull the last paragraph from the latest modified blog from the 2017.declantyson repository and provide me with an option to extend it', function(){
-        assert(notYetImplemented, 'blog data not found');
-    });
+    describe('Finance', function () {
 
-    it('should prompt me at a specified time on a specified day to write a paragraph on a specified blog topic and save it to a .md file in the 2017.declantyson repository', function(){
-        assert(notYetImplemented, 'blog prompt not found');
-    });
+        it('should show a card for yesterday and today', function(){
+            assert(notYetImplemented, `card for yesterday not found`);
+            assert(notYetImplemented, `card for today not found`);
+        });
 
-    it('should pull the last paragraph of the last chapter I worked on in StoryStore and provide me with an option to extend it', function(){
-        assert(notYetImplemented, 'book data not found');
-    });
+        it('should automatically calculate todays allowance based on yesterdays total', function(){
+            assert(notYetImplemented, `todays allowance incorrect, expected ${0}, instead ${1}`);
+        });
 
-    it('should prompt me at a specified time on a specified day to write a paragraph on the last chapter I worked on in StoryStore', function(){
-        assert(notYetImplemented, 'book prompt not found');
+        it('should have the remaining total for the day', function(){
+            assert(notYetImplemented, 'todays total not found');
+        });
+
+        it('should have a list of transactions', function(){
+            assert(notYetImplemented, 'list of transactions not found');
+        });
+
+        it('should allow you to add further transactions', function(){
+            assert(notYetImplemented, 'could not add additional transactions');
+        });
+
+        it('should automatically subtract the transactions from the days total', function(){
+            assert(notYetImplemented, 'total not automatically updated');
+        });
+
     });
 
 });
