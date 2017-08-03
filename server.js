@@ -1,8 +1,8 @@
 /*
  *  Coberta / Local Server
  *  Declan Tyson
- *  v0.3.0
- *  02/08/2017
+ *  v0.3.1
+ *  03/08/2017
  */
 
 const http = require('http'),
@@ -10,6 +10,7 @@ const http = require('http'),
     fs = require('fs'),
     express = require('express'),
     mfp = require('mfp'),
+    bodyParser = require('body-parser'),
     app = express(),
     port = 1234;
 
@@ -22,6 +23,9 @@ app.use("/fonts", express.static('fonts'));
 app.use("/img", express.static('renderer/img'));
 app.use("/media", express.static('media'));
 app.use("/tests", express.static('tests'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req,res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
@@ -102,6 +106,57 @@ app.get('/:file', (req,res) => {
             let renderedHtml = ejs.render(wrapperContent, { data: content });
             res.end(renderedHtml);
         });
+    });
+});
+
+app.get('/finance/transaction/:date', (req, res) => {
+    let path = `data/private/finance_${req.params.date}.json`;
+    if(!fs.existsSync(path)) {
+        let defaultObject = {
+            "date"  : req.params.date,
+            "transactions"  :  []
+        };
+
+        fs.writeFile(path, JSON.stringify(defaultObject), function (err) {
+            if(err) {
+                res.statusCode = 500;
+                res.end("Error check logs");
+                console.error(err);
+
+                return;
+            }
+
+            res.end(JSON.stringify(defaultObject));
+        });
+
+        return;
+    }
+
+    fs.readFile(path, 'utf8', (err, content) => {
+        if (err) {
+            res.statusCode = 500;
+            res.end("Error check logs");
+            console.error(err);
+
+            return;
+        }
+        res.end(content);
+    });
+});
+
+app.post('/finance/transaction/:date', (req, res) => {
+    let path = `data/private/finance_${req.params.date}.json`;
+
+    fs.writeFile(path, JSON.stringify(req.body), function (err) {
+        if(err) {
+            res.statusCode = 500;
+            res.end("Error check logs");
+            console.error(err);
+
+            return;
+        }
+
+        res.end(JSON.stringify(req.body));
     });
 });
 

@@ -21,7 +21,7 @@
     "children" : [
       {
         "type"  : "Finance",
-        "api"  : "/data/private/finance",
+        "api"  : "/finance/transaction/",
         "data"  : {
           "day" : "Yesterday"
         }
@@ -36,7 +36,7 @@
     "children" : [
       {
         "type"  : "Finance",
-        "api"  : "/data/private/finance",
+        "api"  : "/finance/transaction/",
         "data"  : {
           "day" : "Today"
         }

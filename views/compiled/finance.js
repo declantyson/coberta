@@ -2,8 +2,8 @@
 /*
  *
  *	Finance
- *	v0.1.1
- *	02/08/2016
+ *	v0.1.2
+ *	03/08/2016
  *  
  */
 
@@ -16,7 +16,7 @@ window.Finance = React.createClass({displayName: "Finance",
     setFinanceData: function(day, key) {
         var self = this;
 
-        fetch(`${this.props.api}_${day}.json`).then(function(response) {
+        fetch(`${this.props.api}${day}`).then(function(response) {
             return response.json().then(function(data) {
                 let financialData = self.state.data;
                 financialData[key] = data;
@@ -48,11 +48,25 @@ window.Finance = React.createClass({displayName: "Finance",
     },
     updateTransactionList: function(transaction) {
         let data = this.props.data,
+            day = new Date(),
             financialData = this.state.data,
             dayData = financialData[data.day];
 
         dayData.transactions.push(transaction);
         financialData[data.day] = dayData;
+
+        if(data.day === "Yesterday") {
+            day = new Date(day.setDate(day.getDate() - 1));
+        }
+
+        fetch(`/finance/transaction/${day.toISOString().substring(0, 10)}`, {
+            headers: {
+                'Accept'       : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(dayData)
+        });
 
         this.setState({
            data : financialData
@@ -120,7 +134,7 @@ window.TransactionList = React.createClass({displayName: "TransactionList",
             };
 
         if(isNaN(parseFloat(transactionValue))) {
-            alert("error"); // todo: nice
+            alert("error"); // todo: nicer
             return;
         }
 
