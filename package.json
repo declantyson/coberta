@@ -13,7 +13,7 @@
   "keywords": [],
   "author": "Declan Tyson",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.17.2",
     "chai": "^4.0.2",
     "chance": "^1.0.10",
