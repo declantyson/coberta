@@ -2,7 +2,7 @@
 /*
  *
  *	Finance
- *	v0.1.2
+ *	v0.1.3
  *	03/08/2016
  *  
  */
@@ -99,6 +99,7 @@ window.Finance = React.createClass({displayName: "Finance",
         }
 
         remaining = (budget - total).toFixed(2);
+        total = total.toFixed(2);
 
         if(remaining < 0) {
             statusClass = "danger";
@@ -126,8 +127,10 @@ window.TransactionList = React.createClass({displayName: "TransactionList",
         }
     },
     addToList: function() {
-        let transactionName = document.getElementById(this.state.transactionDescriptionInputId).value,
-            transactionValue = document.getElementById(this.state.transactionValueInputId).value,
+        let transactionNameInput = document.getElementById(this.state.transactionDescriptionInputId),
+            transactionValueInput = document.getElementById(this.state.transactionValueInputId),
+            transactionName = transactionNameInput.value,
+            transactionValue = transactionValueInput.value,
             transaction = {
                 "description" : transactionName,
                 "value"      : parseFloat(transactionValue)
@@ -137,6 +140,9 @@ window.TransactionList = React.createClass({displayName: "TransactionList",
             alert("error"); // todo: nicer
             return;
         }
+
+        transactionNameInput.value = "";
+        transactionValueInput.value = "";
 
         this.props.updateTransactionList(transaction);
     },

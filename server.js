@@ -12,7 +12,7 @@ const http = require('http'),
     mfp = require('mfp'),
     bodyParser = require('body-parser'),
     app = express(),
-    port = 1234;
+    port = process.env.PORT || 1234;
 
 app.use("/renderer", express.static('renderer'));
 app.use("/views", express.static('views'));
