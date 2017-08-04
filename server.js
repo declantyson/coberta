@@ -1,8 +1,8 @@
 /*
  *  Coberta / Local Server
  *  Declan Tyson
- *  v0.3.1
- *  03/08/2017
+ *  v0.3.2
+ *  04/08/2017
  */
 
 const http = require('http'),
@@ -12,7 +12,8 @@ const http = require('http'),
     mfp = require('mfp'),
     bodyParser = require('body-parser'),
     app = express(),
-    port = process.env.PORT || 1234;
+    port = process.env.PORT || 1234,
+    mfpConfig = process.env.mfpConfig || false;
 
 app.use("/renderer", express.static('renderer'));
 app.use("/views", express.static('views'));
@@ -64,22 +65,36 @@ app.get('/tests', (req,res) => {
 
 app.get('/mfp', (req, res) => {
     let today = new Date();
-    fs.readFile('data/private/mfp.json', 'utf8', (err, content) => {
-        if (err) {
-            res.statusCode = 500;
-            res.end(err);
-            return;
-        }
 
-        let username = JSON.parse(content).username;
+    if(mfpConfig === false) {
+        fs.readFile('data/private/mfp.json', 'utf8', (err, content) => {
+            if (err) {
+                res.statusCode = 500;
+                res.end("Error, check logs.");
+                console.error(err);
+
+                return;
+            }
+
+            let username = JSON.parse(content).username;
+            try {
+                mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', (data) => {
+                    res.json(data);
+                });
+            } catch (ex) {
+                console.error(ex);
+            }
+        });
+    } else {
+        let username = JSON.parse(mfpConfig).username;
         try {
-            mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', function (data) {
+            mfp.fetchSingleDate(username, today.toISOString().substring(0, 10), 'all', (data) => {
                 res.json(data);
             });
         } catch (ex) {
             console.error(ex);
         }
-    });
+    }
 });
 
 app.get('/:file', (req,res) => {
@@ -117,7 +132,7 @@ app.get('/finance/transaction/:date', (req, res) => {
             "transactions"  :  []
         };
 
-        fs.writeFile(path, JSON.stringify(defaultObject), function (err) {
+        fs.writeFile(path, JSON.stringify(defaultObject), (err) => {
             if(err) {
                 res.statusCode = 500;
                 res.end("Error check logs");
@@ -128,26 +143,24 @@ app.get('/finance/transaction/:date', (req, res) => {
 
             res.end(JSON.stringify(defaultObject));
         });
+    } else {
+        fs.readFile(path, 'utf8', (err, content) => {
+            if (err) {
+                res.statusCode = 500;
+                res.end("Error check logs");
+                console.error(err);
 
-        return;
+                return;
+            }
+            res.end(content);
+        });
     }
-
-    fs.readFile(path, 'utf8', (err, content) => {
-        if (err) {
-            res.statusCode = 500;
-            res.end("Error check logs");
-            console.error(err);
-
-            return;
-        }
-        res.end(content);
-    });
 });
 
 app.post('/finance/transaction/:date', (req, res) => {
     let path = `data/private/finance_${req.params.date}.json`;
 
-    fs.writeFile(path, JSON.stringify(req.body), function (err) {
+    fs.writeFile(path, JSON.stringify(req.body), (err) => {
         if(err) {
             res.statusCode = 500;
             res.end("Error check logs");
@@ -160,6 +173,23 @@ app.post('/finance/transaction/:date', (req, res) => {
     });
 });
 
+app.get('/config/mfp', (req, res) => {
+    if(mfpConfig === false) {
+        fs.readFile('data/private/mfp.json', 'utf8',  (err, content) => {
+           if(err) {
+               res.statusCode = 500;
+               res.end("Error check logs");
+               console.error(err);
+
+               return;
+           }
+
+           res.end(content);
+        });
+    } else {
+        res.end(mfpConfig);
+    }
+});
 
 http.createServer(app).listen(port);
 

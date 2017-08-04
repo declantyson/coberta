@@ -3,7 +3,7 @@
   *  coberta 
   *  Declan Tyson 
   *  v0.0.1 
-  *  03/08/2017 
+  *  04/08/2017 
   * 
   */
 
@@ -159,7 +159,7 @@ window.Card = React.createClass({displayName: "Card",
 /*
  *
  *	Finance
- *	v0.1.3
+ *	v0.1.4
  *	03/08/2016
  *  
  */
@@ -234,7 +234,7 @@ window.Finance = React.createClass({displayName: "Finance",
             data = self.props.data,
             financialData = self.state.data,
             total = 0,
-            budget = 15, // TODO: make this configurable
+            budget = 125/7, // TODO: make this configurable
             remaining = budget,
             dayClass = `finance_day-${data.day}`,
             statusClass = "",
@@ -389,7 +389,7 @@ window.MFPChart = React.createClass({displayName: "MFPChart",
     getMfpMacroLimits: function() {
         var self = this;
 
-        fetch("/data/private/mfp.json").then(function(response) {
+        fetch("/config/mfp").then(function(response) {
             return response.json().then(function(data) {
                 self.setState({ macros: data.macros });
             });

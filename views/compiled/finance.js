@@ -2,7 +2,7 @@
 /*
  *
  *	Finance
- *	v0.1.3
+ *	v0.1.4
  *	03/08/2016
  *  
  */
@@ -77,7 +77,7 @@ window.Finance = React.createClass({displayName: "Finance",
             data = self.props.data,
             financialData = self.state.data,
             total = 0,
-            budget = 15, // TODO: make this configurable
+            budget = 125/7, // TODO: make this configurable
             remaining = budget,
             dayClass = `finance_day-${data.day}`,
             statusClass = "",

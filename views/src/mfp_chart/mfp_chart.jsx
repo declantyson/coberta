@@ -40,7 +40,7 @@ window.MFPChart = React.createClass({
     getMfpMacroLimits: function() {
         var self = this;
 
-        fetch("/data/private/mfp.json").then(function(response) {
+        fetch("/config/mfp").then(function(response) {
             return response.json().then(function(data) {
                 self.setState({ macros: data.macros });
             });
