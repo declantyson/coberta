@@ -168,7 +168,7 @@ window.TransactionList = React.createClass({
                        <input type="text" name="transaction-description" id={self.state.transactionDescriptionInputId} />
                    </div>
                    <div className="transaction-value">
-                       <input type="number" name="transaction-value" id={self.state.transactionValueInputId} />
+                       <input type="number" name="transaction-value" step="any" id={self.state.transactionValueInputId} />
                    </div>
                    <input type="submit" value=""/>
                </form>
