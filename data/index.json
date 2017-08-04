@@ -2,13 +2,13 @@
   "type"  : "Card",
   "api"   : "",
   "data"  : {
-    "title"    : "Nutrition",
+    "title"    : "Today",
     "children" : [
       {
-        "type"  : "MFPChart",
-        "api"  : "/mfp",
+        "type"  : "Finance",
+        "api"  : "/finance/transaction/",
         "data"  : {
-
+          "day" : "Today"
         }
       }
     ]
@@ -32,13 +32,13 @@
   "type"  : "Card",
   "api"   : "",
   "data"  : {
-    "title"    : "Today",
+    "title"    : "Nutrition",
     "children" : [
       {
-        "type"  : "Finance",
-        "api"  : "/finance/transaction/",
+        "type"  : "MFPChart",
+        "api"  : "/mfp",
         "data"  : {
-          "day" : "Today"
+
         }
       }
     ]

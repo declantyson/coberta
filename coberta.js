@@ -159,8 +159,8 @@ window.Card = React.createClass({displayName: "Card",
 /*
  *
  *	Finance
- *	v0.1.4
- *	03/08/2016
+ *	v0.1.5
+ *	04/08/2016
  *  
  */
 
@@ -283,7 +283,9 @@ window.TransactionList = React.createClass({displayName: "TransactionList",
             transactionValueInputId : generateId()
         }
     },
-    addToList: function() {
+    addToList: function(e) {
+        e.preventDefault();
+
         let transactionNameInput = document.getElementById(this.state.transactionDescriptionInputId),
             transactionValueInput = document.getElementById(this.state.transactionValueInputId),
             transactionName = transactionNameInput.value,
@@ -319,13 +321,14 @@ window.TransactionList = React.createClass({displayName: "TransactionList",
            React.createElement("div", {className: "transactions"}, 
                transactions, 
 
-               React.createElement("form", {className: "transaction add-transaction", onDoubleClick: self.addToList.bind(self)}, 
+               React.createElement("form", {className: "transaction add-transaction", onDoubleClick: self.addToList.bind(self), onSubmit: self.addToList.bind(self)}, 
                    React.createElement("div", {className: "transaction-description"}, 
                        React.createElement("input", {type: "text", name: "transaction-description", id: self.state.transactionDescriptionInputId})
                    ), 
                    React.createElement("div", {className: "transaction-value"}, 
                        React.createElement("input", {type: "number", name: "transaction-value", id: self.state.transactionValueInputId})
-                   )
+                   ), 
+                   React.createElement("input", {type: "submit", value: ""})
                )
 
            )
@@ -350,8 +353,8 @@ window.Transaction = React.createClass({displayName: "Transaction",
 /*
  *
  *	MFP Chart
- *	v0.1.0
- *	31/07/2016
+ *	v0.1.1
+ *	04/08/2016
  *  
  */
 

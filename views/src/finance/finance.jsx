@@ -1,8 +1,8 @@
 /*
  *
  *	Finance
- *	v0.1.4
- *	03/08/2016
+ *	v0.1.5
+ *	04/08/2016
  *  
  */
 
@@ -125,7 +125,9 @@ window.TransactionList = React.createClass({
             transactionValueInputId : generateId()
         }
     },
-    addToList: function() {
+    addToList: function(e) {
+        e.preventDefault();
+
         let transactionNameInput = document.getElementById(this.state.transactionDescriptionInputId),
             transactionValueInput = document.getElementById(this.state.transactionValueInputId),
             transactionName = transactionNameInput.value,
@@ -161,13 +163,14 @@ window.TransactionList = React.createClass({
            <div className="transactions">
                {transactions}
 
-               <form className="transaction add-transaction" onDoubleClick={self.addToList.bind(self)}>
+               <form className="transaction add-transaction" onDoubleClick={self.addToList.bind(self)} onSubmit={self.addToList.bind(self)}>
                    <div className="transaction-description">
                        <input type="text" name="transaction-description" id={self.state.transactionDescriptionInputId} />
                    </div>
                    <div className="transaction-value">
                        <input type="number" name="transaction-value" id={self.state.transactionValueInputId} />
                    </div>
+                   <input type="submit" value=""/>
                </form>
 
            </div>

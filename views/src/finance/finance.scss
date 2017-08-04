@@ -1,8 +1,8 @@
 /*
  *
  *	Finance
- *	v0.1.0
- *	02/08/2017
+ *	v0.1.1
+ *	04/08/2017
  *
  */
 
@@ -38,6 +38,13 @@
 			input {
 				width: calc(100% - 10px);
 				padding: 5px;
+				border: solid 1px $gray;
+				&[type=submit] {
+					width: 24px;
+					background-color: $positivity;
+					border: none;
+					padding: 0;
+				}
 			}
 			&:last-of-type {
 				border-bottom: none;

@@ -1,8 +1,8 @@
 /*
  *
  *	Card View
- *	v0.1.3
- *	31/07/2017
+ *	v0.1.4
+ *	04/08/2017
  *
  */
 
@@ -15,6 +15,9 @@
     width: 220px;
 	min-height: 200px;
 	margin: 0 20px 20px 0;
+	@media screen and (max-width: 580px) {
+		margin: 0 auto 20px auto;
+	}
 	h2 {
 		color: $darkergray;
 		border-bottom: solid 1px $gray;
