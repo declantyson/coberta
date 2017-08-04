@@ -13,7 +13,8 @@ const http = require('http'),
     bodyParser = require('body-parser'),
     app = express(),
     port = process.env.PORT || 1234,
-    mfpConfig = process.env.mfpConfig || false;
+    mfpConfig = process.env.mfpConfig || false,
+    localPrivateData = 'data/private';
 
 app.use("/renderer", express.static('renderer'));
 app.use("/views", express.static('views'));
@@ -27,6 +28,10 @@ app.use("/tests", express.static('tests'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+if (!fs.existsSync(localPrivateData)){
+    fs.mkdirSync(localPrivateData);
+}
 
 app.get('/', (req,res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
