@@ -2,7 +2,7 @@
 /*
  *
  *	Finance
- *	v0.1.5
+ *	v0.1.6
  *	04/08/2016
  *  
  */
@@ -39,7 +39,7 @@ window.Finance = React.createClass({displayName: "Finance",
     },
     componentDidMount: function() {
         this.getDataFromEndpoint();
-        //setInterval(this.getDataFromEndpoint, this.props.pollInterval);
+        setInterval(this.getDataFromEndpoint, this.props.pollInterval);
 
         mountedComponents++;
         if(mountedComponents >= document.getElementsByClassName('component').length) {
