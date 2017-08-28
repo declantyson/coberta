@@ -1,8 +1,8 @@
 /* 
 *
 *	Coberta / Renderer
-*	v0.1.4
-*	04/08/2017
+*	v0.1.5
+*	28/08/2017
 *
 */
 /* Mixins */
@@ -20,13 +20,15 @@ html, body {
     overflow: hidden; }
 
 body {
-  -webkit-transition: opacity 0.45s ease-out;
+  -webkit-transition: all 0.45s ease-out;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  transition: opacity 0.45s ease-out;
+  transition: all 0.45s ease-out;
   opacity: 0;
   font-size: 14px;
-  letter-spacing: 0.25px; }
+  letter-spacing: 0.25px;
+  background-position: bottom left;
+  background-size: cover; }
   body.ready {
     opacity: 1; }
 
@@ -63,11 +65,11 @@ code {
 
 /* Imports */
 #content {
-  position: relative;
-  top: 0px;
+  position: absolute;
+  bottom: 0px;
   padding: 20px;
   width: calc(100% - 40px);
-  max-width: 1128px;
+  margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -75,6 +77,22 @@ code {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   transition: transform 0.4s ease-out; }
+  #content:before {
+    content: ' ';
+    height: 300px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+    background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+    /* IE6-9 */ }
 
 /*
  *

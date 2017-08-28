@@ -1,8 +1,8 @@
 /*
  *
  *	Renderer
- *	v0.1.1
- *	29/06/2016
+ *	v0.1.3
+ *	28/08/2017
  *  
  */ 
 
@@ -20,6 +20,15 @@ function setAssetFolder(dir) {
 function renderViews(views, append = true) {
 	var content = document.getElementById("content");
 	if(!append) content = document.createElement("div");
+
+    // Fetch a nice background
+	fetch("https://www.reddit.com/r/EarthPorn+SpacePorn+RoomPorn/hot.json").then(function(response){
+		return response.json();
+	}).then(function (json) {
+		document.getElementsByTagName('body')[0].style.backgroundImage = "url(" + json.data.children[0].data.url + ")";
+        if(mountedComponents >= document.getElementsByClassName('component').length) document.body.className = "ready";
+    });
+
 
 	for(var i = 0; i < views.length; i++) {
 		var view = views[i],
@@ -72,7 +81,7 @@ function renderPreparation(views) {
 }
 
 function renderComplete() {
-	document.body.className = "ready";
+	if(document.getElementsByTagName('body')[0].style.backgroundImage !== "") document.body.className = "ready";
 	if(fullScreenComponents) {
 		document.body.className += " fullscreencomponents"
 	}

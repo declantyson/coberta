@@ -1,8 +1,8 @@
 /* 
 *
 *	Coberta / Renderer
-*	v0.1.4
-*	04/08/2017
+*	v0.1.5
+*	28/08/2017
 *
 */
 
@@ -52,7 +52,6 @@ html, body {
 	min-height: 100vh;
 	font-family: 'Open Sans', sans-serif;
 	background-color: $lightgray;
-	//background-image: url(/img/temporary_background.png);
 	background-size: cover;
 	background-position: 50% 50%;
 	&.fullscreencomponents {
@@ -61,10 +60,12 @@ html, body {
 }
 
 body {
-	@include transition(opacity 0.45s ease-out);
+	@include transition(all 0.45s ease-out);
 	opacity: 0;
 	font-size: 14px;
 	letter-spacing: 0.25px;
+	background-position: bottom left;
+	background-size: cover;
 	&.ready {
 		opacity: 1;
 	}
@@ -114,16 +115,28 @@ code {
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Spectral');
 
 #content {
-	position: relative;
-	top: 0px;
+	position: absolute;
+	bottom: 0px;
 	padding: 20px;
 	width: calc(100% - 40px);
-	max-width: 1128px;
-	//margin: 0 auto;
+	margin: 0 auto;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	@include transition(transform 0.4s ease-out);
+	&:before {
+		content: ' ';
+		height: 300px;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		z-index: -1;
+		background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+	}
 }
 
 @import "../views/src/card/card";
